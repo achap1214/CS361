@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+    <table class="table">
+      <tr>
+        <th>Symbol</th>
+        <th>Mark</th>
+        <th>% Gain/Loss</th>
+      </tr>
+      {% for stock in stocks %}
+      <tr>
+        <td><a class="ml-2" href="{{ url_for('stockPage') }}">{{ stock.symbol }}</a></td>
+        <td>{{ stock.last }}</td>
+        <td>{{ stock.gainLoss }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+{% endblock content %}
