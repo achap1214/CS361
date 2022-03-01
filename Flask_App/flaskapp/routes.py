@@ -1,7 +1,8 @@
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, request, url_for, flash, redirect
 from flaskapp import app
-from flaskapp.forms import RegistrationForm, LoginForm
+from flaskapp.forms import RegistrationForm, LoginForm, StockPriceForm
 from flaskapp.models import User, Stock
+import time
 
 stocks = [
     {
@@ -42,9 +43,26 @@ articles = [
     }
 ]
 
-@app.route("/")
-@app.route("/home")
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/home", methods=['GET', 'POST'])
 def home():
+    # Handle GET Request
+    if request.method == 'GET':
+        if 'stock_symbol' in request.args:
+            stock_symbol = request.args['stock_symbol']
+            with open('symbolprice.txt', 'w') as f:
+                f.write(stock_symbol)
+    # Handle POST Request
+    if request.method == 'POST':
+        stock_symbol = request.form['stock_symbol']
+        with open('symbolprice.txt', 'w') as f:
+            f.write(stock_symbol)
+        time.sleep(5)
+        with open('symbolprice.txt', 'r') as f:
+            price = f.read()
+        clear = open('symbolprice.txt', 'w')
+        clear.close()
+        return price
     return render_template('home.html')
 
 @app.route("/news")

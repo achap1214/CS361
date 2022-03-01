@@ -9,5 +9,12 @@
         <p><a href="{{ url_for('stocksPage') }}">Check out stocks</a></p>
         <p><a href="{{ url_for('groups') }}">Check out stock groups</a></p>
         <p><a href="{{ url_for('portfolios') }}">View your portfolios</a></p>
+        <form action="/" method="POST">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Want to see the price of stock?</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Stock Symbol" name="stock_symbol">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
     </body>
 {% endblock content %}

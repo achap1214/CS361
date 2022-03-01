@@ -15,3 +15,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
+class StockPriceForm(FlaskForm):
+    symbol = StringField('Symbol', validators=[DataRequired(), Length(min=2, max=20)])
+    submit = SubmitField('Search')
