@@ -7,18 +7,38 @@ import time
 stocks = [
     {
         'symbol': 'AAPL',
-        'last': '$168.88',
-        'gainLoss': '0.98%'
+        'last': '$162.04',
+        'gainLoss': '0.88%'
+    },
+    {
+        'symbol': 'AMZN',
+        'last': '$3159.60',
+        'gainLoss': '0.47%'
+    },
+    {
+        'symbol': 'BB',
+        'last': '$7.00',
+        'gainLoss': '2.64%'
+    },
+    {
+        'symbol': 'FB',
+        'last': '$212.76',
+        'gainLoss': '2.37%'
     },
     {
         'symbol': 'MSFT',
-        'last': '$295.00',
-        'gainLoss': '-1.25%'
+        'last': '$296.99',
+        'gainLoss': '0.60%'
+    },
+    {
+        'symbol': 'NVDA',
+        'last': '$261.44',
+        'gainLoss': '5.56%'
     },
     {
         'symbol': 'TSLA',
-        'last': '$875.76',
-        'gainLoss': '0.12%'
+        'last': '$894.67',
+        'gainLoss': '2.61%'
     }
 ]
 
@@ -46,13 +66,11 @@ articles = [
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/home", methods=['GET', 'POST'])
 def home():
-    # Handle GET Request
     if request.method == 'GET':
         if 'stock_symbol' in request.args:
             stock_symbol = request.args['stock_symbol']
             with open('symbolprice.txt', 'w') as f:
                 f.write(stock_symbol)
-    # Handle POST Request
     if request.method == 'POST':
         stock_symbol = request.form['stock_symbol']
         with open('symbolprice.txt', 'w') as f:
@@ -68,10 +86,6 @@ def home():
 @app.route("/news")
 def news():
     return render_template('news.html', title='News', articles=articles)
-
-# @app.route("/about")
-# def about():
-#     return render_template('about.html', title='About')
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
